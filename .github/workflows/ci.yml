@@ -6,14 +6,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
           go-version: '1.22'
-      - run: go test ./apps/processor/...
+          # Importante: Cachear dependencias para velocidad
+          cache-dependency-path: apps/processor/go.sum
+
+      - name: Run Go Tests
+        # El flag -C cambia el directorio de ejecución al del módulo
+        run: go test -v ./...
+        working-directory: apps/processor
 
   test-nextjs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: pnpm install && pnpm run lint --filter web
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8 # O la versión que estés usando localmente
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run Lint
+        run: pnpm run lint --filter web
