@@ -1,0 +1,24 @@
+services:
+  # Broker de eventos (Resiliencia)
+  redis:
+    image: redis:7-alpine
+    container_name: hub-redis
+    ports:
+      - "6379:6379"
+
+  # Base de datos y servicios (Local Supabase se levanta vía CLI, 
+  # pero aquí configuramos nuestro procesador de Go)
+  processor:
+    build: 
+      context: ./apps/processor
+      dockerfile: Dockerfile
+    container_name: hub-processor
+    depends_on:
+      - redis
+    volumes:
+      - ./apps/processor:/app
+    environment:
+      - REDIS_ADDR=redis:6379
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+      - LLM_API_KEY=${LLM_API_KEY}

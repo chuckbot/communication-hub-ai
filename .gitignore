@@ -1,0 +1,19 @@
+# Go
+bin/
+apps/processor/main
+go.work
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+build/
+
+# Environment / Secrets
+.env
+.env.local
+.env.*.local
+
+# Docker / OS
+.DS_Store
+*.log
