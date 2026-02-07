@@ -9,10 +9,10 @@ import (
 	"time"
 
 	"github.com/redis/go-redis/v9"
-	"github.com/tu-usuario/hub-ai-processor/internal/agent"
-	"github.com/tu-usuario/hub-ai-processor/internal/infrastructure/queue"
-	// "github.com/tu-usuario/hub-ai-processor/internal/infrastructure/llm"
-	// "github.com/tu-usuario/hub-ai-processor/internal/infrastructure/repository"
+	"github.com/chuckbot/hub-ai-processor/internal/agent"
+	"github.com/chuckbot/hub-ai-processor/internal/infrastructure/queue"
+	// "github.com/chuckbot/hub-ai-processor/internal/infrastructure/llm"
+	// "github.com/chuckbot/hub-ai-processor/internal/infrastructure/repository"
 )
 
 func main() {

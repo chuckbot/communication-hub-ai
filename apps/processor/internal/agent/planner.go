@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/tu-usuario/hub-ai-processor/internal/domain"
+	"github.com/chuckbot/hub-ai-processor/internal/domain"
 )
 
 // AgentPlan representa la decisión tomada por el Planner

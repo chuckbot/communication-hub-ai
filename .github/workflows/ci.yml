@@ -27,14 +27,14 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
-          version: 8 # O la versión que estés usando localmente
+          version: 8
 
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
-
+          # Eliminamos temporalmente la línea de 'cache' hasta que el lockfile sea estable en el repo
+          
       - name: Install dependencies
         run: pnpm install
 
