@@ -23,9 +23,8 @@ type LLMMessage struct {
 // LLMClient define el contrato para cualquier modelo de lenguaje
 // Esto permite cumplir con el requerimiento de "trade-offs entre latencia y calidad"
 type LLMClient interface {
-	Complete(ctx context.Context, systemPrompt string, userPrompt string) (string, error)
-	// Para arquitecturas agénticas más complejas con memoria episódica:
-	Chat(ctx context.Context, messages []LLMMessage) (string, error)
+    Chat(ctx context.Context, system string, user string) (string, error) 
+    // Asegúrate de que aquí diga Chat si vas a usar Chat en la implementación
 }
 
 // Repository define cómo persistimos los datos (Supabase/Postgres)
