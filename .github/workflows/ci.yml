@@ -26,17 +26,18 @@ jobs:
         uses: pnpm/action-setup@v3
         with:
           version: 8
+          # Esto asegura que los binarios estén en el PATH del runner
+          run_install: false 
 
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          # Eliminamos el cache por ahora para asegurar una instalación limpia
-          
+
       - name: Install dependencies
-        # Forzamos la instalación de todo el monorepo desde la raíz
+        # Agregamos --no-frozen-lockfile para evitar errores de sincronización inicial
         run: pnpm install --no-frozen-lockfile
 
       - name: Run Lint
-        # La clave es ejecutar pnpm desde la raíz filtrando por el proyecto 'web'
+        # La forma más segura en CI es llamar al script a través de pnpm desde la raíz
         run: pnpm --filter web run lint
