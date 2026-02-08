@@ -21,17 +21,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 8
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          # Eliminamos el cache por ahora para asegurar una instalación limpia
+          
       - name: Install dependencies
-        # Esto instalará todo el árbol del monorepo
-        run: pnpm install 
+        # Forzamos la instalación de todo el monorepo desde la raíz
+        run: pnpm install --no-frozen-lockfile
+
       - name: Run Lint
-        # Usamos --filter para decirle: "busca el script lint solo dentro de la app web"
+        # La clave es ejecutar pnpm desde la raíz filtrando por el proyecto 'web'
         run: pnpm --filter web run lint
